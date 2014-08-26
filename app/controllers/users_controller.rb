@@ -11,10 +11,10 @@ class UsersController < ApplicationController
   # Actually build the user
   def create
     
-    @user = User.new(params.require(:user).permit(:name, :email, :password, :password_confirmation))
+    @user = User.new(params.require(:user).permit(:name, :email, :password_digest))
       if @user.save 
         session[:user_id] = @user.id.to_s
-        redirect_to mains_path
+        redirect_to users_path
       else
       redirect_to new_user_path @user
   end
